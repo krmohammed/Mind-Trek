@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block statics %}
+    <link rel="stylesheet" href="{% static "css/landing.css" %}">
+    <script src="{% static "js/float.js" %}" defer></script>
+{% endblock statics %}
+
+{% block content %}
+<div class="floating-shapes">
+    <svg class="shape" style="top: 20%; left: 10%" width="50" height="50">
+      <circle cx="25" cy="25" r="20" fill="var(--primary)"/>
+    </svg>
+    <svg class="shape" style="top: 60%; left: 80%" width="50" height="50">
+      <rect width="40" height="40" fill="var(--secondary)"/>
+    </svg>
+    <svg class="shape" style="top: 40%; left: 50%" width="50" height="50">
+      <polygon points="25,5 45,45 5,45" fill="var(--primary)"/>
+    </svg>
+  </div>
+
+  <div class="container">
+    <section class="hero">
+      <h1>Embark on a Knowledge Journey</h1>
+      <p>Join Mind Trek - where learning becomes an adventure. Challenge yourself with immersive quizzes that take you on a journey through fascinating topics!</p>
+      <a href="https://example.com/start-quiz" class="cta-button">Begin Your Trek</a>
+    </section>
+
+    <section class="features" id="features-section">
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"></path>
+        </svg>
+        <h3>Epic Knowledge Paths</h3>
+        <p>Explore diverse learning trails through Science, History, Arts, and beyond.</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9A3,3 0 0,1 15,12Z"></path>
+        </svg>
+        <h3>Track Your Journey</h3>
+        <p>Chart your progress and witness your knowledge expand with each quiz.</p>
+      </div>
+
+      <div class="feature-card">
+        <svg class="feature-icon" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M16,11.78L20.24,4.45L21.97,5.45L16.74,14.5L10.23,10.75L5.46,19H22V21H2V3H4V17.54L9.5,8L16,11.78Z"></path>
+        </svg>
+        <h3>Global Expedition</h3>
+        <p>Join fellow explorers worldwide and climb the global rankings.</p>
+      </div>
+    </section>
+  </div>
+{% endblock content %}
