@@ -14,6 +14,10 @@
     margin-bottom: 30px;
     font-size: 32px;
   }
+
+  .reg {
+    min-width: 35vw;
+  }
   
   .form-group {
     margin-bottom: 20px;

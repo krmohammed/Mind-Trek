@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static "css/register.css" %}">
 </head>
 <body>
-        <div class="registration-container">
+        <div class="registration-container reg">
             <h2>Join Mind Trek</h2>
             <form id="registrationForm" action="{% url "users:register" %}" method="POST">
               {% csrf_token %}
