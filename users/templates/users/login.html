@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Mind Trek</title>
+    <link rel="stylesheet" href="{% static "css/general.css" %}">
+    <link rel="stylesheet" href="{% static "css/register.css" %}">
+</head>
+<body>
+        <div class="registration-container">
+            <h2>Login To Your Account</h2>
+            <form id="registrationForm" action="{% url "users:login" %}" method="POST">
+              {% csrf_token %}
+              {{ form }}
+              <button type="submit" class="register-btn">Log In</button>
+            </form>
+            
+            <div class="login-link">
+              Don't have an account? <a href="{% url "users:register" %}">Sign up here</a>
+            </div>
+          </div>
+</body>
+</html>
