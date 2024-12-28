@@ -27,12 +27,11 @@
           <div class="nav-links">
             <a href="#features-section">Features</a>
             <a href="https://example.com/contact">Contact</a>
-            <div class="auth-buttons">
-              <button class="login-btn" id="loginBtn">Login</button>
-            </div>
+            <a class="login-btn" id="loginBtn" href="{% url "users:login" %}">Login</a>
           </div>
         </div>
       </nav>
+    
     {% block content %}
     
     {% endblock content %}

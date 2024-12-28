@@ -99,3 +99,10 @@
     opacity: 0.1;
   }
   
+  .alert-success {
+    color: green;
+}
+
+.alert-error {
+    color: red;
+}

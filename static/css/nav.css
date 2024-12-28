@@ -35,30 +35,21 @@
   .nav-links a:hover {
     color: var(--primary);
   }
-
-  .auth-buttons {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    margin-left: 20px;
-  }
   
-  .login-btn {
+  a.login-btn {
     padding: 8px 20px;
     border-radius: 20px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
     display: inline-block;
-  }
-  
-  .login-btn {
     background-color: var(--primary);
     color: white;
     border: none;
   }
   
-  .login-btn:hover {
+  a.login-btn:hover {
     background-color: #5851ff;
+    color: white;
     transform: translateY(-2px);
   }

@@ -11,6 +11,13 @@
 {% endblock statics %}
 
 {% block content %}
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
 <div class="floating-shapes">
     <svg class="shape" style="top: 20%; left: 10%" width="50" height="50">
       <circle cx="25" cy="25" r="20" fill="var(--primary)"/>
@@ -27,7 +34,7 @@
     <section class="hero">
       <h1>Embark on a Knowledge Journey</h1>
       <p>Join Mind Trek - where learning becomes an adventure. Challenge yourself with immersive quizzes that take you on a journey through fascinating topics!</p>
-      <a href="https://example.com/start-quiz" class="cta-button">Begin Your Trek</a>
+      <a href="{% url "users:register" %}" class="cta-button">Begin Your Trek</a>
     </section>
 
     <section class="features" id="features-section">
