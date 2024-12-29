@@ -27,10 +27,10 @@ def user_login(request):
             login(request, form.get_user())
             clear_messages(request)
             messages.success(request, "Login Success")
-            return redirect("/")
+            return redirect("quiz:quiz-home")
     else:
-        formed = AuthenticationForm()
-        form = formed.render("users/reg_template.html")
+        form = AuthenticationForm()
+        #form = formed.render("users/reg_template.html")
     return render(request, "users/login.html", {"form": form})
 
 def user_logout(request):

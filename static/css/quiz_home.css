@@ -1,0 +1,13 @@
+.main-content {
+    margin-top: 80px;
+    padding: 2rem 5%;
+  }
+
+.welcome-banner {
+    background: linear-gradient(135deg, var(--primary), #8B7FFF);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    animation: slideIn 0.6s ease-out;
+  }

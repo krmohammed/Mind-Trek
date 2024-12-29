@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Quiz Home
+{% endblock title %}
+
+{% block statics %}
+    <link rel="stylesheet" href="{% static "css/quiz_home.css" %}">
+{% endblock statics %}
+
+{% block content %}
+    <main class="main-content">
+        <div class="welcome-banner">
+        <h1>Welcome back, {{ user.username|title }}!</h1>
+        <p>Continue your learning journey with these recommended quizzes.</p>
+        </div>
+    </main>
+{% endblock content %}

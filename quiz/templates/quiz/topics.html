@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Topics
+{% endblock title %}
+
+{% block statics %}
+    <link rel="stylesheet" href="{% static "css/topics.css" %}">
+{% endblock statics %}
+
+{% block content %}
+<main class="main-content">
+    <h1>Explore Quizzes by Topics</h1>
+    
+    {% comment %} <div class="search-bar">
+      <input type="text" class="search-input" placeholder="Search quizzes..." id="searchQuiz">
+    </div> {% endcomment %}
+
+    <div class="quiz-categories">
+      {% for topic in topics %}
+        <div class="category-card">
+          <svg class="category-icon" viewBox="0 0 24 24">
+            <path d="M19.5 3.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5zM19 19.09H5V4.91h14v14.18zM6 15h12v2H6zm0-4h12v2H6zm0-4h12v2H6z"/>
+          </svg>
+          <h3>{{ topic.name }}</h3>
+          <p>{{ topic.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+{% endblock content %}
