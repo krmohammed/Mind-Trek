@@ -26,6 +26,16 @@
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   }
+
+  .quiz-item a {
+    text-decoration: none;
+    color: var(--dark);
+    transition: all .4s;
+  }
+
+  .quiz-item a:hover {
+    color: var(--primary);
+  }
   
   .difficulty, .topic {
     display: inline-block;

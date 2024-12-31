@@ -1,0 +1,122 @@
+.quiz-details {
+    margin-top: 80px;
+    padding: 2rem;
+    max-width: 1200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .quiz-header {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  .quiz-title {
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+  
+  .quiz-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .meta-icon {
+    background: var(--primary);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+  
+  .quiz-description {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: slideUp 0.5s ease forwards 0.2s;
+  }
+  
+  .topic-list {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+  
+  .topic-tag {
+    background: #f0f0ff;
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .start-quiz-btn {
+    background: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    /* width: 100%; */
+    max-width: 200px;
+    margin: 2rem auto;
+    text-decoration: none;
+  }
+  
+  .start-quiz-btn:hover {
+    background: #5651d8;
+    transform: translateY(-2px);
+  }
+  
+  .rules-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards 0.4s;
+  }
+  
+  .rules-list {
+    list-style: none;
+    margin: 1rem 0;
+  }
+  
+  .rule-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .rule-icon {
+    color: var(--primary);
+    font-size: 1.2rem;
+  }
