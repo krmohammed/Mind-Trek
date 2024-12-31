@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Quizzes
+{% endblock title %}
+
+{% block statics %}
+    <link rel="stylesheet" href="{% static "css/take_quiz.css" %}">
+{% endblock statics %}
+
+{% block content %}
+<div class="timer-container">
+    <span>Time Remaining:</span>
+    <div class="timer" id="timer">30:00</div>
+  </div>
+
+  <main class="quiz-container">
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <div class="question-card" id="questionCard">
+      <div class="question-number">Question {{ current_question_index }} of {{ total_questions }}</div>
+      <div class="question-text">{{ current_question.text }}</div>
+      
+      <div class="options-container">
+        <form method="POST">
+            {% csrf_token %}
+            {% for answer in answers  %}
+                    <label class="option" for="{{ answer.id }}">
+                        <input type="radio" name="answer" value="{{ answer.id }}" id="{{ answer.id }}">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">{{ answer.text }}</span>
+                    </label>
+            {% endfor %}
+            <div class="navigation-buttons">
+            <button class="nav-btn next-btn" id="nextBtn">Next Question</button>
+      </div>
+        </form>
+      </div>
+
+      
+    </div>
+  </main>
+{% endblock content %}

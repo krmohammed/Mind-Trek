@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{ quiz.title }}
+{% endblock title %}
+
+{% block statics %}
+    <link rel="stylesheet" href="{% static "css/quiz-details.css" %}">
+{% endblock statics %}
+
+{% block content %}
+    <main class="quiz-details">
+        <section class="quiz-header">
+            <h1 class="quiz-title">{{ quiz.title }}</h1>
+            <div class="difficulty medium">{{ quiz.topic.name }}</div>
+      
+            <div class="quiz-meta">
+                <div class="meta-item">
+                    <div class="meta-icon">⏱️</div>
+                    <div>
+                        <h4>Duration</h4>
+                        <p>30 minutes</p>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-icon">❓</div>
+                    <div>
+                        <h4>Questions</h4>
+                        <p>25 questions</p>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-icon">🎯</div>
+                    <div>
+                        <h4>Total Points</h4>
+                        <p>100 points</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quiz-description">
+            <h2>About This Quiz</h2>
+            <p>{{ quiz.description }}</p>
+            {% comment %} <h3>Topics Covered</h3>
+            <div class="topic-list">
+                <span class="topic-tag">Major Battles</span>
+                <span class="topic-tag">Key Figures</span>
+                <span class="topic-tag">Political Climate</span>
+                <span class="topic-tag">Military Strategy</span>
+                <span class="topic-tag">Historical Impact</span>
+            </div> {% endcomment %}
+        </section>
+
+        <section class="rules-section">
+            <h2>Quiz Rules</h2>
+            <ul class="rules-list">
+                <li class="rule-item">
+                    <span class="rule-icon">⏰</span>
+                    <span>You have 30 minutes to complete the quiz</span>
+                </li>
+                <li class="rule-item">
+                    <span class="rule-icon">🎯</span>
+                    <span>Each question is worth 4 points</span>
+                </li>
+                <li class="rule-item">
+                    <span class="rule-icon">↩️</span>
+                    <span>You can't return to previous questions</span>
+                </li>
+                <li class="rule-item">
+                    <span class="rule-icon">❌</span>
+                    <span>No negative marking for wrong answers</span>
+                </li>
+                <li class="rule-item">
+                    <span class="rule-icon">🏆</span>
+                    <span>Minimum 70% required to pass</span>
+                </li>
+            </ul>
+        </section>
+
+        <a href="{% url "quiz:take-quiz" quiz_id=quiz.id %}" class="start-quiz-btn" id="startQuizBtn" onClick="radi('{{ quiz.description }}')">Start Quiz</a>
+    </main>
+    <script>
+        function radi(m) {
+            console.log(m);
+        }
+    </script>
+{% endblock content %}

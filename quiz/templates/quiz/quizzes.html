@@ -24,7 +24,7 @@
         {% for quiz in quizzes %}
             <div class="quiz-item">
                 <span class="difficulty easy">{{ quiz.topic.name }}</span>
-                <h3>{{ quiz.title }}</h3>
+                <h3><a href="{% url "quiz:quiz-details" quiz_id=quiz.id %}">{{ quiz.title }}</a></h3>
                 <p>{{ quiz.description }}</p>
                 <div class="quiz-stats">
                     <span>⏱️ 15 mins</span>

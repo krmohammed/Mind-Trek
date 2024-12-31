@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Quiz Summary
+{% endblock title %}
+
+{% block statics %}
+    <link rel="stylesheet" href="{% static "css/quiz-summary.css" %}">
+{% endblock statics %}
+
+{% block content %}
+<main class="results-container">
+    <div class="results-header">
+      <h1>Quiz Results</h1>
+      <div class="score-circle" style="--percentage: 75%">
+        <div class="score-text">
+          <div class="score-value">75%</div>
+          <div class="score-label">Score</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">18/24</div>
+        <div class="stat-label">Correct Answers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">6/24</div>
+        <div class="stat-label">Incorrect Answers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">25:30</div>
+        <div class="stat-label">Time Taken</div>
+      </div>
+    </div>
+
+    <div class="performance-feedback">
+      <h2 class="feedback-header">Performance Analysis</h2>
+      <p class="feedback-text">
+        Excellent work! You showed strong knowledge in World War II history, particularly in questions related to key events and military operations. Consider reviewing topics related to the Pacific Theater and Eastern Front to improve your understanding further.
+      </p>
+    </div>
+
+    <div class="action-buttons">
+      <a href="https://example.com/quiz/review" class="action-btn primary-btn">Review Answers</a>
+      <a href="https://example.com/quizzes" class="action-btn secondary-btn">Try Another Quiz</a>
+    </div>
+  </main>
+
+  <script>
+    // Animate score on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const score = 75; // This would come from the quiz results
+      const scoreCircle = document.querySelector('.score-circle');
+      const scoreValue = document.querySelector('.score-value');
+      
+      let currentScore = 0;
+      const duration = 1500; // 1.5 seconds
+      const steps = 60; // 60 frames
+      const increment = score / steps;
+      
+      const timer = setInterval(() => {
+        currentScore += increment;
+        if (currentScore >= score) {
+          currentScore = score;
+          clearInterval(timer);
+        }
+        
+        scoreValue.textContent = `${Math.round(currentScore)}%`;
+        scoreCircle.style.setProperty('--percentage', `${currentScore}%`);
+      }, duration / steps);
+    });
+  </script>
+{% endblock content %}
