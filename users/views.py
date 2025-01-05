@@ -15,8 +15,7 @@ def user_registration(request):
             messages.success(request, "Registration successful. You can now log in.")
             return redirect("users:login")
     else:
-        formed = UserCreationForm()
-        form = formed.render("users/reg_template.html")
+        form = UserCreationForm()
     return render(request, "users/register.html", {"form": form})
 
 
@@ -28,11 +27,15 @@ def user_login(request):
             clear_messages(request)
             messages.success(request, "Login Success")
             return redirect("quiz:quiz-home")
+        else:
+            clear_messages(request)
+            messages.success(request, "Invalid Credentials")
     else:
         form = AuthenticationForm()
-        #form = formed.render("users/reg_template.html")
     return render(request, "users/login.html", {"form": form})
 
 def user_logout(request):
+    clear_messages(request)
+    messages.success(request, "Logout Success")
     logout(request)
     return redirect("/")

@@ -9,22 +9,50 @@
     <link rel="stylesheet" href="{% static "css/register.css" %}">
 </head>
 <body>
-        <div class="registration-container">
-            <h2>Login To Your Account</h2>
-            <form id="registrationForm" action="{% url "users:login" %}" method="POST">
-              {% csrf_token %}
-              {% for field in form %}
-                <div class="form-group">
-                  {{ field.label_tag }}
-                  {{ field }}
-                </div>
-              {% endfor %}
-              <button type="submit" class="register-btn">Log In</button>
-            </form>
+  {% if messages %}
+    {% for message in messages %}
+      <div id="toast" class="toast"></div>
+    {% endfor %}
+  {% endif %}
+  <div class="registration-container">
+    <h2>Login To Your Account</h2>
+    <form id="registrationForm" action="{% url "users:login" %}" method="POST">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          {{ field.label_tag }}
+          {{ field }}
+        </div>
+      {% endfor %}
+      <button type="submit" class="register-btn">Log In</button>
+    </form>
             
-            <div class="login-link">
-              Don't have an account? <a href="{% url "users:register" %}">Sign up here</a>
-            </div>
-          </div>
+    <div class="login-link">
+      Don't have an account? <a href="{% url "users:register" %}">Sign up here</a>
+    </div>
+  </div>
+  <script>
+    function showToast(message, type = 'success', duration = 3000) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = `toast ${type}`;
+      
+      // Show toast
+      setTimeout(() => {
+        toast.classList.add('show');
+      }, 100);
+  
+      // Hide toast
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, duration);
+    }
+  
+    document.addEventListener('DOMContentLoaded', () => {
+      {% for message in messages %}
+        showToast('{{ message }}', 'error', 3500);
+      {% endfor %}
+    });
+  </script>
 </body>
 </html>

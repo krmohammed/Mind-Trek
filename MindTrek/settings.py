@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "users.apps.UsersConfig",
-    "quiz.apps.QuizConfig"
+    "quiz.apps.QuizConfig",
+    "mathfilters"
 ]
 
 MIDDLEWARE = [

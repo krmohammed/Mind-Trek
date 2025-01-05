@@ -13,7 +13,12 @@
             <h2>Join Mind Trek</h2>
             <form id="registrationForm" action="{% url "users:register" %}" method="POST">
               {% csrf_token %}
-              {{ form }}
+              {% for field in form %}
+                <div class="form-group">
+                  {{ field.label_tag }}
+                  {{ field }}
+                </div>
+              {% endfor %}
               <button type="submit" class="register-btn">Create Account</button>
             </form>
             
