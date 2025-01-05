@@ -10,14 +10,16 @@
     align-items: center;
   }
   
-  .logo {
+  .logo a {
     font-size: 24px;
     font-weight: bold;
     color: var(--primary);
     display: flex;
     align-items: center;
     gap: 10px;
+    text-decoration: none;
   }
+
 
   .nav-links {
     display: flex;

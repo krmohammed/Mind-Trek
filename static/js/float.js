@@ -33,3 +33,4 @@ document.querySelectorAll('.shape').forEach(shape => {
     observer.observe(section);
     section.classList.add('fade-in');
 });
+

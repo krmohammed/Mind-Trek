@@ -5,6 +5,7 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
   }
   
   .quiz-header {
@@ -72,7 +73,7 @@
     font-size: 0.9rem;
   }
   
-  .start-quiz-btn {
+  .start-quiz-btn, .restart-quiz-btn, .cancel-quiz-btn {
     background: var(--primary);
     color: white;
     text-align: center;
@@ -87,6 +88,14 @@
     max-width: 200px;
     margin: 2rem auto;
     text-decoration: none;
+  }
+
+  .cancel-quiz-btn {
+    background-color: crimson;
+  }
+
+  .restart-quiz-btn {
+    background-color: var(--secondary);
   }
   
   .start-quiz-btn:hover {
@@ -120,3 +129,151 @@
     color: var(--primary);
     font-size: 1.2rem;
   }
+
+  .modal-box {
+    /* height: 100vh;
+    width: 100vw; */
+    background-color: #f0f0ff80;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+ .modal {
+  background-color: #f0f0ff;
+  height: 350px;
+  width: 500px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+ }
+  
+ .modal-btns {
+  display: flex;
+ }
+
+ div.take-quiz-links {
+  display: flex;
+ }
+
+ @media (max-width: 768px) {
+  .quiz-title {
+    font-size: 1.3rem;
+  }
+
+  .quiz-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .meta-item {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .quiz-details {
+    padding: 0.8rem;
+  }
+
+  .quiz-header,
+  .quiz-description,
+  .rules-section {
+    padding: 1rem;
+  }
+
+  .topic-list {
+    gap: 0.5rem;
+  }
+
+  .topic-tag {
+    font-size: 0.7rem;
+  }
+
+  .rule-item {
+    font-size: 0.8rem;
+  }
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.popup-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.popup-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 400px;
+  transform: scale(0.7);
+  opacity: 0;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.popup-overlay.active .popup-box {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.popup-title {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.popup-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.popup-btn {
+  padding: 0.8rem 2rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-yes {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-yes:hover {
+  background: #5651d8;
+}
+
+.btn-no {
+  background: #e0e0e0;
+  color: var(--dark);
+}
+
+.btn-no:hover {
+  background: #d0d0d0;
+}

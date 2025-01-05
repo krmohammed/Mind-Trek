@@ -1,14 +1,43 @@
 .main-content {
     margin-top: 80px;
     padding: 2rem;
-    max-width: 1200px;
+    min-width: 1200px;
     margin-left: auto;
     margin-right: auto;
   }
 
+  .quiz-filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--primary);
+    border-radius: 25px;
+    background: transparent;
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  
+  .filter-btn.active {
+    background: var(--primary);
+    color: white;
+  }
+  
+  .filter-btn:hover {
+    background: var(--primary);
+    color: white;
+  }
+
 .quiz-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
   }
@@ -61,4 +90,54 @@
     margin-top: 1rem;
     font-size: 0.9rem;
     color: #666;
+  }
+
+  @media (max-width: 768px) {    
+    .main-content {
+      max-width: 1200px;
+      min-width: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    
+    .quiz-filters {
+      justify-content: center;
+    }
+    
+    .filter-btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .main-content {
+      max-width: 1200px;
+      min-width: auto;
+    }
+
+    .quiz-card {
+      margin: 0 auto;
+      max-width: 100%;
+    }
+    
+    .quiz-image {
+      height: 120px;
+      font-size: 2.5rem;
+    }
+    
+    .quiz-content {
+      padding: 1rem;
+    }
+    
+    .quiz-content h3 {
+      font-size: 1rem;
+    }
+    
+    .quiz-meta {
+      font-size: 0.75rem;
+    }
   }
