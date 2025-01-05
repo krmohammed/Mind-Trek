@@ -10,10 +10,10 @@
 {% endblock statics %}
 
 {% block content %}
-<div class="timer-container">
+  {% comment %} <div class="timer-container">
     <span>Time Remaining:</span>
     <div class="timer" id="timer">30:00</div>
-  </div>
+  </div> {% endcomment %}
 
   <main class="quiz-container">
     <div class="progress-bar">
@@ -24,8 +24,8 @@
       <div class="question-number">Question {{ current_question_index }} of {{ total_questions }}</div>
       <div class="question-text">{{ current_question.text }}</div>
       
-      <div class="options-container">
-        <form method="POST">
+      <form method="POST">
+          <div class="options-container">
             {% csrf_token %}
             {% for answer in answers  %}
                     <label class="option" for="{{ answer.id }}">
@@ -34,13 +34,22 @@
                         <span class="option-text">{{ answer.text }}</span>
                     </label>
             {% endfor %}
-            <div class="navigation-buttons">
-            <button class="nav-btn next-btn" id="nextBtn">Next Question</button>
-      </div>
+              <button class="nav-btn next-btn" id="nextBtn">{% if current_question_index == total_questions %}Finish{% else %}Next{% endif %}</button>
+            </div>
+          </div>
         </form>
-      </div>
-
-      
     </div>
   </main>
+  <script>
+    document.querySelectorAll('.option').forEach(option => {
+      option.addEventListener('click', () => {
+        // Remove previous selection
+        document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+        // Add selection to clicked option
+        option.classList.add('selected');
+        // Save answer
+        selectedAnswers[currentQuestion] = option.dataset.value;
+      });
+    });
+  </script>
 {% endblock content %}

@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% load static %}
+{% load mathfilters %}
 
 {% block title %}
     Quiz Home
@@ -10,10 +11,96 @@
 {% endblock statics %}
 
 {% block content %}
-    <main class="main-content">
-        <div class="welcome-banner">
-        <h1>Welcome back, {{ user.username|title }}!</h1>
-        <p>Continue your learning journey with these recommended quizzes.</p>
+    <main class="dashboard">
+        <div class="welcome-section">
+            <h1>Welcome back, {{ user.username|title }}! &#x1f44b;</h1>
+            <p>Continue your learning journey with these recommended quizzes.</p>
         </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">&#x1f4ca;</div>
+                    <h3>Total Quizzes</h3>
+                </div>
+                <div class="stat-value">{{ attempts_count }}</div>
+                <p>Quizzes completed</p>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">&#x1f3c6;</div>
+                    <h3>Average Score</h3>
+                </div>
+                <div class="stat-value">{{ average }}%</div>
+                <p>Across all quizzes</p>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-icon">&#x2b50;</div>
+                    <h3>Points Earned</h3>
+                </div>
+                <div class="stat-value">{{ total_points }}</div>
+                <p>Total points</p>
+            </div>
+        </div>
+
+        <section class="recent-activity">
+            <h2>Recent Attempts</h2>
+            <div class="activity-list">
+                {% if attempts %}
+                    {% for attempt in attempts %}
+                        <div class="activity-item">
+                            <div class="activity-icon">&#x1f4dd;</div>
+                            <div class="activity-details">
+                                <h4><a href="{% url "quiz:quiz-summary" quiz_id=attempt.quiz.id %}">{{ attempt.quiz.title }}</a></h4>
+                                <p>Completed with {{ attempt.score|mul:100|div:attempt.quiz.max_points|stringformat:'d' }}% score</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                        <h3>None</h3>
+                {% endif %}
+            </div>
+        </section>
     </main>
+    <script>
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = timestamp => {
+              if (!startTimestamp) startTimestamp = timestamp;
+              const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+              const currentValue = Math.floor(progress * (end - start) + start);
+              element.textContent = currentValue + (element.dataset.suffix || '');
+              if (progress < 1) {
+                window.requestAnimationFrame(step);
+              }
+            };
+            window.requestAnimationFrame(step);
+        }
+        const observerOptions = {
+            threshold: 0.1
+        };
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+                if (entry.target.classList.contains('stat-value')) {
+                  const value = parseInt(entry.target.textContent);
+                  if (entry.target.textContent.includes('%')) {
+                    entry.target.dataset.suffix = '%';
+                    animateValue(entry.target, 0, parseInt(entry.target.textContent), 1000);
+                  } else {
+                    animateValue(entry.target, 0, value, 1000);
+                  }
+                }
+              }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.welcome-section, .stat-card, .recent-activity, .achievement-section, .stat-value').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 {% endblock content %}

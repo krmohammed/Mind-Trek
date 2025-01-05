@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}
+    Quiz Summary
+{% endblock title %}
+
+{% block statics %}
+    <link rel="stylesheet" href="{% static "css/quiz-summary.css" %}">
+    <link rel="stylesheet" href="{% static "css/quiz_review.css" %}">
+{% endblock statics %}
+
+{% block content %}
+    <main class="review-container">
+        <section class="quiz-header">
+            <h1>{{ quiz.title }} Quiz Review</h1>
+            <div class="quiz-stats">
+                <div class="stat-pill">Score: {{ score }}%</div>
+                <div class="stat-pill">{{ attempt.score|stringformat:'d' }} points</div>
+                <div class="stat-pill">Correct: {{ correct_answers }}/{{ quiz.questions.all|length }}</div>
+            </div>
+        </section>
+
+        <div class="questions-list" id="questionsList">
+            {% for question in quiz.questions.all %}
+                <div class="question-card">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text">{{ question.text }}</div>
+                    <div class="options-list">
+                        {% for answer in question.answers.all %}
+                            {% if answer.is_correct %}
+                                <div class="option-item correct">
+                                    <div class="option-marker correct">✓</div>
+                                    <div class="option-text">{{ answer.text }}</div>
+                                </div>
+                            {% elif answer in user_answers %}
+                                <div class="option-item incorrect">
+                                    <div class="option-marker incorrect">✓</div>
+                                    <div class="option-text">{{ answer.text }}</div>
+                                </div>
+                            {% else %}
+                                <div class="option-item">
+                                    <div class="option-marker"></div>
+                                    <div class="option-text">{{ answer.text }}</div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% if question.explanation %}
+                        <div class="explanation">
+                            <strong>Explanation:</strong> Because of why
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <a href="{% url "quiz:quizzes" %}" class="try-again-btn">Try Another Quiz</a>
+    </main>
+{% endblock content %}

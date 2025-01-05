@@ -12,9 +12,14 @@
 {% block content %}
 <main class="main-content">
     <h1>Topics</h1>
-    {% for topic in topics %}
-        <a class="topic" href="#">{{ topic.name }}</a>
-    {% endfor %}
+    <div class="quiz-filters">
+        <a class="filter-btn active" href="#">All</a>
+        {% for topic in topics %}
+            <a class="filter-btn" href="#">{{ topic.name }}</a>
+        {% endfor %}
+        <a class="filter-btn" href="#">More...</a>
+    </div>
+    
     
     {% comment %} <div class="search-bar">
       <input type="text" class="search-input" placeholder="Search quizzes..." id="searchQuiz">
@@ -27,12 +32,21 @@
                 <h3><a href="{% url "quiz:quiz-details" quiz_id=quiz.id %}">{{ quiz.title }}</a></h3>
                 <p>{{ quiz.description }}</p>
                 <div class="quiz-stats">
-                    <span>⏱️ 15 mins</span>
-                    <span>⭐ 4.8/5</span>
-                    <span>👤 1.2k taken</span>
+                    <span>📑 {{ quiz.max_points }} points</span>
+                    {% comment %} <span>⭐ 4.8/5</span> {% endcomment %}
+                    <span>{{ quiz.user_attempts.all|length  }} taken</span>
                 </div>
             </div>
         {% endfor %}
     </div>
   </main>
+  
+  <script>
+    document.querySelector('.quiz-filters').addEventListener('click', (e) => {
+        if (e.target.classList.contains('filter-btn')) {
+          document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+          e.target.classList.add('active');
+        }
+    });
+  </script>
 {% endblock content %}

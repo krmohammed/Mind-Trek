@@ -18,7 +18,12 @@ class Quiz(models.Model):
     title = models.CharField(max_length=255)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='quizzes')
     description = models.TextField(blank=True, null=True)
+    points_per_question = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    def max_points(self):
+        """Calculate the maximum points for this quiz."""
+        return self.questions.count() * self.points_per_question
 
     def __str__(self):
         return self.title
@@ -28,6 +33,7 @@ class Question(models.Model):
     """Model for questions within a quiz."""
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
     text = models.TextField()
+    explanation = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

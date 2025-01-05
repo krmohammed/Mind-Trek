@@ -20,21 +20,21 @@
                     <div class="meta-icon">⏱️</div>
                     <div>
                         <h4>Duration</h4>
-                        <p>30 minutes</p>
+                        <p>--</p>
                     </div>
                 </div>
                 <div class="meta-item">
                     <div class="meta-icon">❓</div>
                     <div>
                         <h4>Questions</h4>
-                        <p>25 questions</p>
+                        <p>{{ quiz.questions.all|length }} questions</p>
                     </div>
                 </div>
                 <div class="meta-item">
                     <div class="meta-icon">🎯</div>
                     <div>
                         <h4>Total Points</h4>
-                        <p>100 points</p>
+                        <p>{{ max_points }} points</p>
                     </div>
                 </div>
             </div>
@@ -58,11 +58,11 @@
             <ul class="rules-list">
                 <li class="rule-item">
                     <span class="rule-icon">⏰</span>
-                    <span>You have 30 minutes to complete the quiz</span>
+                    <span>You have -- minutes to complete the quiz</span>
                 </li>
                 <li class="rule-item">
                     <span class="rule-icon">🎯</span>
-                    <span>Each question is worth 4 points</span>
+                    <span>Each question is worth {{ quiz.points_per_question }} points</span>
                 </li>
                 <li class="rule-item">
                     <span class="rule-icon">↩️</span>
@@ -72,18 +72,72 @@
                     <span class="rule-icon">❌</span>
                     <span>No negative marking for wrong answers</span>
                 </li>
-                <li class="rule-item">
+                {% comment %} <li class="rule-item">
                     <span class="rule-icon">🏆</span>
                     <span>Minimum 70% required to pass</span>
-                </li>
+                </li> {% endcomment %}
             </ul>
         </section>
 
-        <a href="{% url "quiz:take-quiz" quiz_id=quiz.id %}" class="start-quiz-btn" id="startQuizBtn" onClick="radi('{{ quiz.description }}')">Start Quiz</a>
+        {% if attempts %}
+            <div class='take-quiz-links'>
+                <a href="{% url "quiz:quiz-summary" quiz_id=quiz.id %}" class="start-quiz-btn">View Summary</a>
+                <button class="start-quiz-btn" id="startQuizBtn">Attempt Again</button>
+            </div>
+        {% else %}
+            <a href="{% url "quiz:take-quiz" quiz_id=quiz.id %}" class="start-quiz-btn">Start Quiz</a>
+        {% endif %}
+
+        <div class="popup-overlay" id="quizPopup">
+            <div class="popup-box">
+              <h2 class="popup-title">Start Quiz?</h2>
+              <p>Are you sure? This will delete record for the previous attempt!!.</p>
+              <div class="popup-buttons">
+                <button class="popup-btn btn-yes" id="confirmStartQuiz">Yes, Start Quiz</button>
+                <button class="popup-btn btn-no" id="cancelStartQuiz">No, Cancel</button>
+              </div>
+            </div>
+        </div>
+        {% comment %} <div class="modal-box">
+            <div class="modal">
+                <h2>This will delete record for the previous attempt!!<br>Are you sure you want to attempt again?</h2>
+                <div class="modal-btns">
+                    <a href="{% url "quiz:retake-quiz" quiz_id=quiz.id %}" class="restart-quiz-btn" id="startQuizBtn">Reattempt</a>
+                    <a class="cancel-quiz-btn" id="cancelQuizBtn">Cancel</a>
+                </div>
+            </div>
+        </div> {% endcomment %}
     </main>
     <script>
-        function radi(m) {
-            console.log(m);
-        }
+        document.getElementById('startQuizBtn').addEventListener('click', () => {
+            const popup = document.getElementById('quizPopup');
+            popup.classList.add('active');
+          });
+      
+          document.getElementById('confirmStartQuiz').addEventListener('click', () => {
+            window.location.href = '{% url "quiz:retake-quiz" quiz_id=quiz.id %}';
+          });
+      
+          document.getElementById('cancelStartQuiz').addEventListener('click', () => {
+            const popup = document.getElementById('quizPopup');
+            popup.classList.remove('active');
+          });
+      
+          document.getElementById('quizPopup').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('quizPopup')) {
+              document.getElementById('quizPopup').classList.remove('active');
+            }
+          });
+        {% comment %} const startQuizBtn = document.querySelector('button#startQuizBtn');
+        const cancelQuizBtn = document.querySelector('#cancelQuizBtn');
+        const modalBox = document.querySelector('.modal-box');
+
+        startQuizBtn.addEventListener('click', () => {
+            modalBox.style.display = 'flex';
+        });
+
+        cancelQuizBtn.addEventListener('click', () => {
+            modalBox.style.display = 'none';
+        }); {% endcomment %}
     </script>
 {% endblock content %}

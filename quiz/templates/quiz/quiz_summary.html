@@ -10,12 +10,12 @@
 {% endblock statics %}
 
 {% block content %}
-<main class="results-container">
+  <main class="results-container">
     <div class="results-header">
-      <h1>Quiz Results</h1>
+      <h1>{{ attempt.quiz.title }}: Quiz Results</h1>
       <div class="score-circle" style="--percentage: 75%">
         <div class="score-text">
-          <div class="score-value">75%</div>
+          <div class="score-value">{{ score }}%</div>
           <div class="score-label">Score</div>
         </div>
       </div>
@@ -23,41 +23,42 @@
 
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-value">18/24</div>
+        <div class="stat-value">{{ correct_answers }}</div>
         <div class="stat-label">Correct Answers</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value">6/24</div>
+        <div class="stat-value">{{ wrong_answers }}</div>
         <div class="stat-label">Incorrect Answers</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value">25:30</div>
-        <div class="stat-label">Time Taken</div>
+        <div class="stat-value">{{ attempt.score }}</div>
+        <div class="stat-label">Points</div>
       </div>
     </div>
 
-    <div class="performance-feedback">
+    {% comment %} <div class="performance-feedback">
       <h2 class="feedback-header">Performance Analysis</h2>
       <p class="feedback-text">
         Excellent work! You showed strong knowledge in World War II history, particularly in questions related to key events and military operations. Consider reviewing topics related to the Pacific Theater and Eastern Front to improve your understanding further.
       </p>
-    </div>
+    </div> {% endcomment %}
 
     <div class="action-buttons">
-      <a href="https://example.com/quiz/review" class="action-btn primary-btn">Review Answers</a>
-      <a href="https://example.com/quizzes" class="action-btn secondary-btn">Try Another Quiz</a>
+      <a href="{% url "quiz:review-quiz" quiz_id=attempt.quiz.id %}" class="action-btn primary-btn">Review Answers</a>
+      <a href="{% url "quiz:quiz-details" quiz_id=attempt.quiz.id %}" class="action-btn secondary-btn">Try Again</a>
+      <a href="{% url "quiz:quizzes" %}" class="action-btn primary-btn">Try Another Quiz</a>
     </div>
   </main>
 
   <script>
     // Animate score on load
     document.addEventListener('DOMContentLoaded', () => {
-      const score = 75; // This would come from the quiz results
+      const score = {{ score }};
       const scoreCircle = document.querySelector('.score-circle');
       const scoreValue = document.querySelector('.score-value');
       
       let currentScore = 0;
-      const duration = 1500; // 1.5 seconds
+      const duration = 1500;
       const steps = 60; // 60 frames
       const increment = score / steps;
       
