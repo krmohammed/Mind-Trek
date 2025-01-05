@@ -11,13 +11,6 @@
 {% endblock statics %}
 
 {% block content %}
-  {% if messages %}
-  <ul>
-      {% for message in messages %}
-          <li class="{{ message.tags }}">{{ message }}</li>
-      {% endfor %}
-  </ul>
-  {% endif %}
 <div class="floating-shapes">
     <svg class="shape" style="top: 20%; left: 10%" width="50" height="50">
       <circle cx="25" cy="25" r="20" fill="var(--primary)"/>
