@@ -7,7 +7,7 @@ from django.db.models import Avg, Sum
 
 
 # Create your views here.
-@login_required(login_url="quiz:quiz-home")
+@login_required(login_url="users:login")
 def quiz_home(request):
     attempts = UserQuizAttempt.objects.filter(user=request.user)
     points = attempts.aggregate(Sum("score", default=0))["score__sum"]
@@ -35,11 +35,13 @@ def topics(request):
     topics = Topic.objects.all()
     return render(request, "quiz/topics.html", {"topics": topics})
 
+@login_required(login_url="users:login")
 def quizzes(request):
     topics = Topic.objects.all().order_by('?')[:3]
     quizes = Quiz.objects.all().order_by("?")
     return render(request, "quiz/quizzes.html", {"quizzes": quizes, "topics": topics})
 
+@login_required(login_url="users:login")
 def quiz_details(request, quiz_id):
     quiz = Quiz.objects.get(id=int(quiz_id))
     try:
@@ -55,7 +57,7 @@ def quiz_details(request, quiz_id):
     }
     return render(request, "quiz/quiz_details.html", context)
 
-
+@login_required(login_url="users:login")
 def take_quiz(request, quiz_id):
     quiz = get_object_or_404(Quiz, id=quiz_id)
     
@@ -112,6 +114,7 @@ def take_quiz(request, quiz_id):
     }
     return render(request, "quiz/take_quiz.html", context)
 
+@login_required(login_url="users:login")
 def review_quiz(request, quiz_id):
     quiz = Quiz.objects.get(id=quiz_id)
     # correct = quiz.answers.all()
@@ -137,12 +140,14 @@ def review_quiz(request, quiz_id):
     }
     return render(request, 'quiz/quiz_review.html', context)
 
+@login_required(login_url="users:login")
 def retake_quiz(request, quiz_id):
     quiz = Quiz.objects.get(id=quiz_id)
     attempt = UserQuizAttempt.objects.get(quiz=quiz, user=request.user)
     attempt.delete()
     return redirect('quiz:take-quiz', quiz_id=quiz_id)
 
+@login_required(login_url="users:login")
 def quiz_summary(request, quiz_id):
     quiz = Quiz.objects.get(id=quiz_id)
     attempt = UserQuizAttempt.objects.get(user=request.user, quiz=quiz)
@@ -167,7 +172,7 @@ def quiz_summary(request, quiz_id):
             }
     return render(request, "quiz/quiz_summary.html", context)
 
-@login_required(login_url="quiz:quiz-home")
+@login_required(login_url="users:login")
 def quizzes_attempted(request):
     attempts = UserQuizAttempt.objects.filter(user=request.user)
     points = attempts.aggregate(Sum("score", default=0))["score__sum"]
