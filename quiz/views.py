@@ -166,3 +166,27 @@ def quiz_summary(request, quiz_id):
                 "wrong_answers": wrong_answers
             }
     return render(request, "quiz/quiz_summary.html", context)
+
+@login_required(login_url="quiz:quiz-home")
+def quizzes_attempted(request):
+    attempts = UserQuizAttempt.objects.filter(user=request.user)
+    points = attempts.aggregate(Sum("score", default=0))["score__sum"]
+    
+    total_max_points = 0
+
+    # Iterate through each attempt
+    for attempt in attempts:
+        total_max_points += attempt.quiz.max_points()
+        
+    print(total_max_points)
+    print(points)
+        
+    average_score = (points / total_max_points) * 100 if total_max_points > 0 else 0
+        
+    context = {
+        "attempts": attempts.order_by('-completed_at'),
+        "attempts_count": attempts.count(),
+        "total_points": points,
+        "average": average_score
+    }
+    return render(request, "quiz/attempted.html", context)

@@ -8,6 +8,7 @@ urlpatterns = [
     path("", views.quiz_home, name="quiz-home"),
     path("topics/", views.topics, name="topics"),
     path("quizzes/", views.quizzes, name="quizzes"),
+    path("attempted/", views.quizzes_attempted, name="quiz-attempted"),
     path("quizzes/quiz-details/<str:quiz_id>", views.quiz_details, name="quiz-details"),
     path("take-quiz/<str:quiz_id>", views.take_quiz, name="take-quiz"),
     path("review-quiz/<str:quiz_id>", views.review_quiz, name="review-quiz"),
