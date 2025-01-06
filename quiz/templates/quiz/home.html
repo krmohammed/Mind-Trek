@@ -55,7 +55,7 @@
                             <div class="activity-icon">&#x1f4dd;</div>
                             <div class="activity-details">
                                 <h4><a href="{% url "quiz:quiz-summary" quiz_id=attempt.quiz.id %}">{{ attempt.quiz.title }}</a></h4>
-                                <p>Completed with {{ attempt.score|mul:100|div:attempt.quiz.max_points|stringformat:'d' }}% score</p>
+                                <p>Completed with {{ attempt.score|mul:100|div:attempt.quiz.max_points|floatformat:2 }}% score</p>
                             </div>
                         </div>
                     {% endfor %}

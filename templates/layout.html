@@ -34,7 +34,7 @@
         <div class="nav-links">
           {% if user.is_authenticated %}
             <a href="{% url "quiz:quizzes" %}">Quizes</a>
-            <a href="#">Trek</a>
+            <a href="{% url "quiz:quiz-attempted" %}">Attempted</a>
             <a class="login-btn" id="loginBtn" href="{% url "users:logout" %}">Logout</a>
           {% else %}
             <a href="#features-section">Features</a>
