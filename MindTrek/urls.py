@@ -19,7 +19,8 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
+    path('mind-trek-admin/', admin.site.urls),
     path('', views.home, name="home"),
     path("auth/", include("users.urls")),
     path("quiz/", include("quiz.urls")),
