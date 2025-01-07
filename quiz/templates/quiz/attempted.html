@@ -11,74 +11,73 @@
 {% endblock statics %}
 
 {% block content %}
-    <main class="main-content">
-      {% if attempts %}
-        <div class="attempts-header">
-            <h1>Your Quiz Attempts</h1>
-        </div>
+  <main class="main-content">
+    {% if attempts %}
+      <div class="attempts-header">
+          <h1>Your Quiz Attempts</h1>
+      </div>
 
-        <div class="stats-container">
-            <div class="stat-card">
-                <div class="stat-number">{{ attempts_count }}</div>
-                <div class="stat-label">Total Attempts</div>
+      <div class="stats-container">
+          <div class="stat-card">
+              <div class="stat-number">{{ attempts_count }}</div>
+              <div class="stat-label">Total Attempts</div>
+          </div>
+          <div class="stat-card">
+              <div class="stat-number">{{ average|floatformat:2 }}%</div>
+              <div class="stat-label">Average Score</div>
+          </div>
+          <div class="stat-card">
+              <div class="stat-number">{{ total_points }}</div>
+              <div class="stat-label">Points Earned</div>
+          </div>
+      </div>
+      
+      <div class="attempts-list">
+          <!-- Attempts will be dynamically populated here -->
+      </div>
+    {% else %}
+      <div class="no-attempts">
+        <h1>You are yet to attempt a quiz.</h1>
+        <h1><a href="{% url "quiz:quizzes" %}">Begin your Trek with these recommended quizzes.</a></h1>
+      </div>
+    {% endif %}
+  </main>
+  <script>
+    function getScoreClass(score) {
+      if (score >= 90) return 'excellent';
+      if (score >= 75) return 'good';
+      if (score >= 60) return 'average';
+      return 'poor';
+    }
+
+    function createAttemptCard(id, title, topic, completed, questions, score) {
+      return `
+        <div class="attempt-card">
+          <div class="attempt-info">
+            <h3><a href="/quiz/quiz-summary/${id}">${title}</a></h3>
+            <div class="attempt-meta">
+              <span>📚 ${topic}</span>
+              <span>📅 ${ completed }</span>
+              {% comment %} <span>⏱️ 30 mins</span> {% endcomment %}
+              <span>📝 ${questions} questions</span>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">{{ average|floatformat:2 }}%</div>
-                <div class="stat-label">Average Score</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">{{ total_points }}</div>
-                <div class="stat-label">Points Earned</div>
-            </div>
+          </div>
+          <div class="score-circle ${getScoreClass(score)}">
+            ${score}%
+          </div>
         </div>
-        
-        <div class="attempts-list">
-            <!-- Attempts will be dynamically populated here -->
-        </div>
-      {% else %}
-        <div class="no-attempts">
-          <h1>You are yet to attempt a quiz.</h1>
-          <h1><a href="{% url "quiz:quizzes" %}">Begin your Trek with these recommended quizzes.</a></h1>
-        </div>
-      {% endif %}
-    </main>
-    <script>
-        function getScoreClass(score) {
-          if (score >= 90) return 'excellent';
-          if (score >= 75) return 'good';
-          if (score >= 60) return 'average';
-          return 'poor';
-        }
-    
-        function createAttemptCard(id, title, topic, completed, questions, score) {
-          console.log(completed)
-          return `
-            <div class="attempt-card">
-              <div class="attempt-info">
-                <h3><a href="/quiz/quiz-summary/${id}">${title}</a></h3>
-                <div class="attempt-meta">
-                  <span>📚 ${topic}</span>
-                  <span>📅 ${ completed }</span>
-                  {% comment %} <span>⏱️ 30 mins</span> {% endcomment %}
-                  <span>📝 ${questions} questions</span>
-                </div>
-              </div>
-              <div class="score-circle ${getScoreClass(score)}">
-                ${score}%
-              </div>
-            </div>
-          `;
-        }
-    
-        function renderAttempts() {
-          const attemptsList = document.querySelector('.attempts-list');
-          attemptsList.innerHTML = '';
-          {% for attempt in attempts %}
-            attemptsList.innerHTML += createAttemptCard({{ attempt.quiz.id }}, "{{ attempt.quiz.title }}", "{{ attempt.quiz.topic }}", "{{ attempt.completed_at|slice:":1" }}", {{ attempt.quiz.questions.all|length }}, {{ attempt.score|mul:100|div:attempt.quiz.max_points|floatformat:2 }});
-          {% endfor %}
-        }
-    
-        // Initial render
-        renderAttempts();
-    </script>
+      `;
+    }
+
+    function renderAttempts() {
+      const attemptsList = document.querySelector('.attempts-list');
+      attemptsList.innerHTML = '';
+      {% for attempt in attempts %}
+        attemptsList.innerHTML += createAttemptCard({{ attempt.quiz.id }}, "{{ attempt.quiz.title }}", "{{ attempt.quiz.topic }}", "{{ attempt.completed_at|slice:":1" }}", {{ attempt.quiz.questions.all|length }}, {{ attempt.score|mul:100|div:attempt.quiz.max_points|floatformat:2 }});
+      {% endfor %}
+    }
+
+    // Initial render
+    renderAttempts();
+  </script>
 {% endblock content %}

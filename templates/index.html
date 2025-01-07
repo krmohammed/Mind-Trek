@@ -27,7 +27,11 @@
     <section class="hero">
       <h1>Embark on a Knowledge Journey</h1>
       <p>Join Mind Trek - where learning becomes an adventure. Challenge yourself with immersive quizzes that take you on a journey through fascinating topics!</p>
-      <a href="{% url "users:register" %}" class="cta-button">Begin Your Trek</a>
+      {% if user.is_authenticated %}
+        <a href="{% url "quiz:quiz-home" %}" class="cta-button">Dashboard</a>
+      {% else %}
+        <a href="{% url "users:register" %}" class="cta-button">Begin Your Trek</a>
+      {% endif %}
     </section>
 
     <section class="features" id="features-section">
