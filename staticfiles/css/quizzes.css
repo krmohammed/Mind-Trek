@@ -1,0 +1,143 @@
+.main-content {
+    margin-top: 80px;
+    padding: 2rem;
+    min-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .quiz-filters {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--primary);
+    border-radius: 25px;
+    background: transparent;
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  
+  .filter-btn.active {
+    background: var(--primary);
+    color: white;
+  }
+  
+  .filter-btn:hover {
+    background: var(--primary);
+    color: white;
+  }
+
+.quiz-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .quiz-item {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .quiz-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  .quiz-item a {
+    text-decoration: none;
+    color: var(--dark);
+    transition: all .4s;
+  }
+
+  .quiz-item a:hover {
+    color: var(--primary);
+  }
+  
+  .difficulty, .topic {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .topic {
+    background-color: var(--primary);
+    color: var(--light);
+    text-decoration: none;
+  }
+  
+  .easy { background: #E8F5E9; color: #2E7D32; }
+  .medium { background: #FFF3E0; color: #EF6C00; }
+  .hard { background: #FFEBEE; color: #C62828; }
+  
+  .quiz-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  @media (max-width: 768px) {    
+    .main-content {
+      max-width: 1200px;
+      min-width: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+    }
+    
+    .quiz-filters {
+      justify-content: center;
+    }
+    
+    .filter-btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .main-content {
+      max-width: 1200px;
+      min-width: auto;
+    }
+
+    .quiz-card {
+      margin: 0 auto;
+      max-width: 100%;
+    }
+    
+    .quiz-image {
+      height: 120px;
+      font-size: 2.5rem;
+    }
+    
+    .quiz-content {
+      padding: 1rem;
+    }
+    
+    .quiz-content h3 {
+      font-size: 1rem;
+    }
+    
+    .quiz-meta {
+      font-size: 0.75rem;
+    }
+  }
