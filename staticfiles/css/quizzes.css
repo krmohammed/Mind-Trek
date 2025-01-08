@@ -96,6 +96,7 @@
     .main-content {
       max-width: 1200px;
       min-width: auto;
+      margin-top: 20px;
     }
 
     h1 {

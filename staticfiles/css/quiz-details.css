@@ -181,6 +181,10 @@
     padding: 0.8rem;
   }
 
+  div.take-quiz-links {
+    display: block;
+   }
+
   .quiz-header,
   .quiz-description,
   .rules-section {
@@ -276,4 +280,10 @@
 
 .btn-no:hover {
   background: #d0d0d0;
+}
+
+@media (max-width: 420px) {
+  .popup-buttons {
+    flex-direction: column;
+  }
 }

@@ -120,8 +120,9 @@ div.no-attempts h1 a:hover {
 }
 
 .excellent { background: #4CAF50; }
-.good { background: #2196F3; }
-.average { background: #FFC107; }
+.very-good { background: #2196F3; }
+.good { background: #FFC107; }
+.average { background: #ff8b07; }
 .poor { background: #F44336; }
 
 @keyframes fadeIn {
