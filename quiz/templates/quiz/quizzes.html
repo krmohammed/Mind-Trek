@@ -13,9 +13,9 @@
 <main class="main-content">
     <h1>Topics</h1>
     <div class="quiz-filters">
-        <a class="filter-btn active" href="#">All</a>
+        <a class="filter-btn active" href="{% url "quiz:quizzes" %}">All</a>
         {% for topic in topics %}
-            <a class="filter-btn" href="#">{{ topic.name }}</a>
+            <a class="filter-btn" href="{% url "quiz:quizzes" %}?q={{ topic.name }}">{{ topic.name }}</a>
         {% endfor %}
         <a class="filter-btn" href="#">More...</a>
     </div>
@@ -42,11 +42,17 @@
   </main>
   
   <script>
-    document.querySelector('.quiz-filters').addEventListener('click', (e) => {
+    {% comment %} document.querySelector('.quiz-filters').addEventListener('click', (e) => {
         if (e.target.classList.contains('filter-btn')) {
           document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
           e.target.classList.add('active');
         }
-    });
+    }); {% endcomment %}
+    document.querySelectorAll('.filter-btn').forEach((el) => {
+        if (window.location.href.includes(el.textContent)) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            el.classList.add('active');
+        }
+    })
   </script>
 {% endblock content %}

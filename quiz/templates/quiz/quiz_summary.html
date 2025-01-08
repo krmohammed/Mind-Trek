@@ -3,7 +3,7 @@
 
 {% block title %}
     {{ attempt.quiz.title }} Summary
-{% endblock title %}
+{% endblock title %} 
 
 {% block statics %}
     <link rel="stylesheet" href="{% static "css/quiz-summary.css" %}">
@@ -44,9 +44,9 @@
     </div> {% endcomment %}
 
     <div class="action-buttons">
-      <a href="{% url "quiz:review-quiz" quiz_id=attempt.quiz.id %}" class="action-btn primary-btn">Review Answers</a>
-      <a href="{% url "quiz:quiz-details" quiz_id=attempt.quiz.id %}" class="action-btn secondary-btn">Try Again</a>
-      <a href="{% url "quiz:quizzes" %}" class="action-btn primary-btn">Try Another Quiz</a>
+      <div><a href="{% url "quiz:review-quiz" quiz_id=attempt.quiz.id %}" class="action-btn primary-btn">Review Answers</a></div>
+      <div><a href="{% url "quiz:quiz-details" quiz_id=attempt.quiz.id %}" class="action-btn secondary-btn">Try Again</a></div>
+      <div><a href="{% url "quiz:quizzes" %}" class="action-btn primary-btn">Try Another Quiz</a></div>
     </div>
   </main>
 

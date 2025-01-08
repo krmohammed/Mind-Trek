@@ -37,8 +37,9 @@ def topics(request):
 
 @login_required(login_url="users:login")
 def quizzes(request):
-    topics = Topic.objects.all().order_by('?')[:3]
-    quizes = Quiz.objects.all().order_by("?")
+    topics = Topic.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') else ''
+    quizes = Quiz.objects.filter(topic__name__icontains=q)
     return render(request, "quiz/quizzes.html", {"quizzes": quizes, "topics": topics})
 
 @login_required(login_url="users:login")

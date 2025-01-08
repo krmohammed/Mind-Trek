@@ -78,11 +78,11 @@
                 </li> {% endcomment %}
             </ul>
         </section>
-
+ 
         {% if attempts %}
             <div class='take-quiz-links'>
                 <a href="{% url "quiz:quiz-summary" quiz_id=quiz.id %}" class="start-quiz-btn">View Summary</a>
-                <button class="start-quiz-btn" id="startQuizBtn">Attempt Again</button>
+                <button class="start-quiz-btn" id="startQuizBtn">Attempt Again</button> 
             </div>
         {% else %}
             <a href="{% url "quiz:take-quiz" quiz_id=quiz.id %}" class="start-quiz-btn">Start Quiz</a>

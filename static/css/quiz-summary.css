@@ -62,7 +62,7 @@
     padding: 1.5rem;
     border-radius: 10px;
     text-align: center;
-    animation: slideUp 0.5s ease-out;
+    animation: slideUp 0.5s ease-out;  
   }
   
   .stat-value {
@@ -93,6 +93,7 @@
     font-weight: 500;
     transition: all 0.3s ease;
     text-decoration: none;
+    text-align: center;
   }
   
   .primary-btn {
@@ -153,3 +154,22 @@
     color: var(--dark);
   }
   
+  @media (max-width: 480px) {
+    .results-container {
+      margin-top: 40px;
+      margin-left: 0rem;
+      margin-right: 0rem;
+    }
+
+    .action-buttons {
+      /* display: block; */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    .action-btn {
+      display: inline-block;
+    }
+  }
